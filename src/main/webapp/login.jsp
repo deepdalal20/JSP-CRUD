@@ -1,5 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	Cookie[] cookies=request.getCookies();
+	String userName = "", password = "";
+	if (cookies != null) {
+	     for (Cookie cookie : cookies) {
+	       if(cookie.getName().equals("RemId")) {
+	         userName = cookie.getValue();
+	       }
+	       if(cookie.getName().equals("RemPass")){
+	         password = cookie.getValue();
+	       }
+	    }
+	}
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,18 +32,18 @@
                 <span class="title">Login</span>
                 <form action="" method="post">
                     <div class="input-field">
-                        <input type="email" placeholder="Enter your email" name="logemail" required>
+                        <input type="email" value="<%=userName%>" placeholder="email" name="logemail" required>
                         <i class="uil uil-envelope icon"></i>
                     </div>
                     <div class="input-field">
-                        <input type="password" class="password" placeholder="Enter your password" name="logpass" required>
+                        <input type="password" class="password" value="<%=password%>" name="logpass" required>
                         <i class="uil uil-lock icon"></i>
                         <i class="uil uil-eye-slash showHidePw"></i>
                     </div>
                     <div class="checkbox-text">
                         <div class="checkbox-content">
-                            <input type="checkbox" id="logCheck">
-                            <label for="logCheck" class="text" name="reme">Remember me</label>
+                            <input type="checkbox" id="logCheck" name="reme">
+                            <label for="logCheck" class="text">Remember me</label>
                         </div>
                         <a href="forgetpass.jsp" class="text">Forgot password?</a>
                     </div>
